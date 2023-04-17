@@ -14,19 +14,14 @@ public class SpringMvcServlet extends AbstractAnnotationConfigDispatcherServletI
     protected Class<?>[] getRootConfigClasses() {
         return null;
     }
-
     @Override
     protected Class<?>[] getServletConfigClasses() {
         return new Class[]{SpringConfig.class};
     }
-
     @Override
     protected String[] getServletMappings() {
         return new String[]{"/"};
     }
-
-
-
     public void onStartup(ServletContext servletContext) throws ServletException {
         super.onStartup(servletContext);
         registerHiddenFieldFilter(servletContext);

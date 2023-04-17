@@ -34,16 +34,13 @@ import java.util.Properties;
 @EnableTransactionManagement(proxyTargetClass = true)
 @EnableWebMvc
 public class SpringConfig implements WebMvcConfigurer {
-
     private final ApplicationContext applicationContext;
     private final Environment env;  //org.springframework.core.env
-
     @Autowired
     public SpringConfig(ApplicationContext applicationContext, Environment env) {
         this.applicationContext = applicationContext;
         this.env = env;
     }
-
     @Bean
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
@@ -53,7 +50,6 @@ public class SpringConfig implements WebMvcConfigurer {
         templateResolver.setCharacterEncoding("UTF-8");
         return templateResolver;
     }
-
     @Bean
     public SpringTemplateEngine templateEngine() {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
@@ -61,7 +57,6 @@ public class SpringConfig implements WebMvcConfigurer {
         templateEngine.setEnableSpringELCompiler(true);
         return templateEngine;
     }
-
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
@@ -82,8 +77,6 @@ public class SpringConfig implements WebMvcConfigurer {
         return dataSource;
 
     }
-
-
     private Properties hibernateProperties() {
         Properties properties = new Properties();
 
@@ -91,7 +84,6 @@ public class SpringConfig implements WebMvcConfigurer {
         properties.put("hibernate.show_sql", env.getRequiredProperty("hibernate.show_sql"));
         return properties;
     }
-
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
@@ -103,7 +95,6 @@ public class SpringConfig implements WebMvcConfigurer {
         em.setJpaProperties(hibernateProperties());
         return em;
     }
-
     @Bean
     public PlatformTransactionManager JpaTransactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();

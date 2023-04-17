@@ -11,34 +11,18 @@ import java.util.List;
 
 
 @Repository
-@Transactional(readOnly = true)
+
 public class UserRepositoryImp implements UserRepository {
-
-
-
     @PersistenceContext
     private EntityManager entityManager;
-
-
     @Override
     public List<User> index() {
         return entityManager.createQuery("from User", User.class).getResultList();
     }
-
     @Override
-    public User show(int id) {
-        return entityManager.find(User.class, id);
-
-    }
-
-    @Transactional
-    public void save(User person) {
-        entityManager.persist(person);
-    }
-
+    public User show(int id) {return entityManager.find(User.class, id);}
+    public void save(User person) {entityManager.persist(person);}
     @Override
-    @Transactional
-
     public void update(int id, User user) {
         User user1 = entityManager.find(User.class, id);
         if (user1 != null) {
@@ -48,13 +32,8 @@ public class UserRepositoryImp implements UserRepository {
             entityManager.merge(user);
 
         }
-
     }
-
-
-
     @Override
-    @Transactional
     public void delete(int id) {
         User person = entityManager.find(User.class, id);
         if (person != null) {
